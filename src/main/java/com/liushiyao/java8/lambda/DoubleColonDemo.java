@@ -33,7 +33,7 @@ public class DoubleColonDemo {
     public void DoubleColonTest(){
 
         List<Integer> list = Arrays.asList(1,2,3,4);
-        list.forEach(DoubleColonDemo::add);
+        list.forEach(DoubleColonDemo::red);
 
     }
 
@@ -41,6 +41,10 @@ public class DoubleColonDemo {
     public static int add(Integer num){
         System.out.println(num);
         return 1+num;
+    }
+    public static int red(Integer num){
+        System.out.println(num);
+        return --num;
     }
 
 
