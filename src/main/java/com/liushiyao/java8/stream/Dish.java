@@ -2,15 +2,31 @@ package com.liushiyao.java8.stream;
 
 
 public class Dish {
-    private final String name;
-    private final boolean vegetarian;
-    private final int calories;
-    private final Type type;
+    private  String name;
+    private  boolean vegetarian;
+    private  int calories;
+    private  Type type;
 
     public Dish(String name, boolean vegetarian, int calories, Type type) {
         this.name = name;
         this.vegetarian = vegetarian;
         this.calories = calories;
+        this.type = type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setVegetarian(boolean vegetarian) {
+        this.vegetarian = vegetarian;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -31,4 +47,14 @@ public class Dish {
     }
 
     public enum Type {MEAT, FISH, OTHER}
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "name='" + name + '\'' +
+                ", vegetarian=" + vegetarian +
+                ", calories=" + calories +
+                ", type=" + type +
+                '}';
+    }
 }

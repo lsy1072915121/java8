@@ -1,10 +1,12 @@
 package com.liushiyao.java8;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.junit.Test;
 
+import javax.sql.DataSource;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Demo {
 
@@ -145,7 +147,34 @@ public class Demo {
 
     }
 
+    @Test
+    public void Test7(){
+        Calendar startTime = Calendar.getInstance();
+        Calendar endTime = Calendar.getInstance();
+        startTime.add(Calendar.MINUTE,-30);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date start = startTime.getTime();
+        Date end = endTime.getTime();
 
+        System.out.println("startTime:"+simpleDateFormat.format(start));
+        System.out.println("endTime:"+simpleDateFormat.format(end));
+    }
+
+    @Test
+    public void Test8(){
+
+        String str = "data:image/png;base64,12321313";
+        str = str.substring(str.indexOf("base64,")+7);
+        System.out.println(str);
+
+    }
+
+    @Test
+    public void Test9(){
+
+        System.out.println((int)Math.ceil(524289/1.0/524288));
+
+    }
 
 
 

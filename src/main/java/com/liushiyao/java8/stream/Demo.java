@@ -20,24 +20,56 @@ public class Demo {
     static {
 
         menu = Arrays.asList(
-            new Dish("pork", false, 800, Dish.Type.MEAT),
-            new Dish("beef", false, 700, Dish.Type.MEAT),
-            new Dish("chicken", false, 400, Dish.Type.MEAT),
-            new Dish("french fries", true, 530, Dish.Type.OTHER),
-            new Dish("rice", true, 350, Dish.Type.OTHER),
-            new Dish("season fruit", true, 120, Dish.Type.OTHER),
-            new Dish("pizza", true, 550, Dish.Type.OTHER),
-            new Dish("prawns", false, 300, Dish.Type.FISH),
-            new Dish("salmon", false, 450, Dish.Type.FISH));
+            new Dish("猪肉", false, 800, Dish.Type.MEAT),
+            new Dish("牛肉", false, 700, Dish.Type.MEAT),
+            new Dish("鸡肉", false, 400, Dish.Type.MEAT),
+            new Dish("薯条", true, 530, Dish.Type.OTHER),
+            new Dish("白饭", true, 350, Dish.Type.OTHER),
+            new Dish("水果", true, 120, Dish.Type.OTHER),
+            new Dish("披萨", true, 550, Dish.Type.OTHER),
+            new Dish("虾", false, 300, Dish.Type.FISH));
+    }
+
+    //返回热量低于300卡路里的菜肴名称,并按卡路里升序排序
+    //java8之前
+    @Test
+    public void jdk7(){
+
+        //过滤
+        List<Dish> below400List = new ArrayList<>();
+        for (Dish dish:menu){
+            if(dish.getCalories() < 300){
+                below400List.add(dish);
+            }
+        }
+        //排序
+        below400List.sort(new Comparator<Dish>() {
+            @Override
+            public int compare(Dish o1, Dish o2) {
+                return o1.getCalories() - o2.getCalories();
+            }
+        });
+
+        //拿菜肴的名字
+        List<String> nameList = new ArrayList<>();
+        for (Dish dish:below400List){
+            nameList.add(dish.getName());
+        }
+        System.out.println("nameList:"+nameList);
+
+
     }
 
 
-    public static void main(String[] args) {
+    //返回热量低于300卡路里的菜肴名称,并按卡路里升序排序
+    //java8之后
+    @Test
+    public void jdk8() {
 
-        List nameList = menu.stream()
+        List<String> nameList = menu.stream()
+            .filter(d -> d.getCalories() < 300)
+            .sorted(Comparator.comparing(Dish::getCalories))
             .map(Dish::getName)
-            .map(String::length)
-            .limit(3)
             .collect(Collectors.toList());
         System.out.println("nameList:" + nameList);
 
@@ -123,5 +155,57 @@ public class Demo {
 
     }
 
+    //findFirst
+    @Test
+    public void Test7(){
+
+        List<Integer> someNumbers = Arrays.asList(1, 2, 3, 4, 5);
+        Optional<Integer> firstSquareDivisibleByThree =
+            someNumbers.stream()
+                .map(x -> x * x)
+                .filter(x -> x % 3 == 0) .findFirst(); // 9
+        System.out.println(firstSquareDivisibleByThree);
+
+
+    }
+
+    //流中的元素是否都能匹配给定的谓词
+    @Test
+    public void Test8(){
+
+        boolean isHealthy = menu.stream()
+            .allMatch(d -> d.getCalories() < 1000);
+
+        System.out.println("isHealthy:"+isHealthy);
+    }
+    //流中的元素是否存在匹配给定的谓词
+    @Test
+    public void Test9(){
+
+        boolean hasHealthy = menu.stream()
+            .anyMatch(d -> d.getCalories() < 1000);
+
+        System.out.println("hasHealthy:"+hasHealthy);
+    }
+
+    //reduce归于
+    @Test
+    public void Test10(){
+
+
+        List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9);
+        Optional<Integer> sum = list.stream().reduce(Integer::sum);
+        System.out.println("sum:"+sum.get());
+
+
+    }
+
+    @Test
+    public void Test11(){
+        String name ="sfs.xvxdfdf.xls";
+        System.out.println(name.substring(name.lastIndexOf(".")+1));
+
+
+    }
 
 }

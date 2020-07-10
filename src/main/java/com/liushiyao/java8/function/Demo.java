@@ -1,6 +1,6 @@
 package com.liushiyao.java8.function;
 
-//函数式接口
+//内置函数式接口
 
 import org.junit.Test;
 
